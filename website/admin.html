@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>لوحة التحكم — ITALIANO</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Tajawal:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #080808; color: #F5F0E8; font-family: 'Tajawal', sans-serif; min-height: 100vh; }
+
+    nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 3rem;
+      background: rgba(8,8,8,0.98);
+      border-bottom: 1px solid rgba(201,168,76,0.15);
+      position: sticky; top: 0; z-index: 100;
+    }
+    .nav-logo { font-family: 'Cinzel', serif; font-size: 1.2rem; color: #C9A84C; text-decoration: none; letter-spacing: 4px; }
+    .nav-right { display: flex; align-items: center; gap: 1.5rem; }
+    .nav-right a { color: #666; text-decoration: none; font-size: 0.85rem; transition: color 0.3s; }
+    .nav-right a:hover { color: #C9A84C; }
+    .user-chip { display: flex; align-items: center; gap: 0.5rem; background: rgba(201,168,76,0.08); border: 1px solid rgba(201,168,76,0.2); padding: 0.4rem 1rem; border-radius: 2px; }
+    .user-chip img { width: 28px; height: 28px; border-radius: 50%; }
+    .user-chip span { font-size: 0.85rem; color: #C9A84C; }
+
+    .unauthorized { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 80vh; text-align: center; }
+    .unauthorized h1 { font-family: 'Cinzel', serif; font-size: 3rem; color: #8B0000; margin-bottom: 1rem; }
+    .unauthorized p { color: #666; margin-bottom: 2rem; }
+    .back-btn { color: #C9A84C; text-decoration: none; font-family: 'Cinzel', serif; font-size: 0.8rem; letter-spacing: 2px; border: 1px solid rgba(201,168,76,0.3); padding: 0.8rem 2rem; transition: all 0.3s; }
+    .back-btn:hover { background: rgba(201,168,76,0.1); }
+
+    .dashboard { max-width: 1200px; margin: 0 auto; padding: 3rem 2rem; }
+
+    .dash-header { margin-bottom: 3rem; }
+    .dash-header h1 { font-family: 'Cinzel', serif; font-size: 2rem; color: #C9A84C; margin-bottom: 0.3rem; }
+    .dash-header p { color: #555; font-size: 0.9rem; }
+
+    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 3rem; }
+    .stat-card { background: #111; border: 1px solid rgba(201,168,76,0.1); padding: 1.5rem; transition: border-color 0.3s; }
+    .stat-card:hover { border-color: rgba(201,168,76,0.3); }
+    .stat-icon { font-size: 1.5rem; margin-bottom: 0.75rem; }
+    .stat-num { font-family: 'Cinzel', serif; font-size: 2rem; font-weight: 700; color: #F5F0E8; display: block; }
+    .stat-label { font-size: 0.75rem; color: #555; letter-spacing: 2px; text-transform: uppercase; margin-top: 0.3rem; display: block; }
+
+    .control-section { background: #111; border: 1px solid rgba(201,168,76,0.1); padding: 2rem; margin-bottom: 2rem; }
+    .control-section h2 { font-family: 'Cinzel', serif; font-size: 1.1rem; color: #C9A84C; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem; }
+    .control-section h2::after { content: ''; flex: 1; height: 1px; background: rgba(201,168,76,0.1); }
+
+    .apply-control { display: flex; align-items: center; justify-content: space-between; }
+    .apply-status { display: flex; align-items: center; gap: 1rem; }
+    .status-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .dot-open { background: #00CC00; box-shadow: 0 0 8px #00CC00; }
+    .dot-closed { background: #CC0000; box-shadow: 0 0 8px #CC0000; }
+    .status-text { font-family: 'Cinzel', serif; font-size: 0.9rem; }
+
+    .toggle-apply-btn {
+      padding: 0.9rem 2.5rem;
+      font-family: 'Cinzel', serif;
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      cursor: pointer;
+      border: none;
+      transition: all 0.3s;
+      text-transform: uppercase;
+    }
+    .btn-open { background: linear-gradient(135deg, #006400, #008000); color: white; }
+    .btn-open:hover { background: linear-gradient(135deg, #008000, #00A000); transform: translateY(-2px); }
+    .btn-close { background: linear-gradient(135deg, #8B0000, #AA0000); color: white; }
+    .btn-close:hover { background: linear-gradient(135deg, #AA0000, #CC0000); transform: translateY(-2px); }
+
+    .apps-table { width: 100%; border-collapse: collapse; }
+    .apps-table th { font-family: 'Cinzel', serif; font-size: 0.75rem; color: #C9A84C; letter-spacing: 2px; padding: 0.75rem 1rem; text-align: right; border-bottom: 1px solid rgba(201,168,76,0.1); }
+    .apps-table td { padding: 1rem; border-bottom: 1px solid rgba(255,255,255,0.03); font-size: 0.9rem; color: #888; }
+    .apps-table tr:hover td { background: rgba(201,168,76,0.03); color: #F5F0E8; }
+
+    .user-cell { display: flex; align-items: center; gap: 0.75rem; }
+    .user-cell img { width: 32px; height: 32px; border-radius: 50%; border: 1px solid rgba(201,168,76,0.2); }
+    .user-cell span { color: #F5F0E8; font-size: 0.9rem; }
+
+    .view-btn {
+      padding: 0.4rem 1rem;
+      background: transparent;
+      border: 1px solid rgba(201,168,76,0.3);
+      color: #C9A84C;
+      font-family: 'Cinzel', serif;
+      font-size: 0.7rem;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .view-btn:hover { background: rgba(201,168,76,0.1); }
+
+    .empty-table { text-align: center; padding: 3rem; color: #444; }
+    .empty-table p { font-family: 'Cinzel', serif; }
+
+    /* Modal */
+    .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 200; display: none; align-items: center; justify-content: center; padding: 2rem; }
+    .modal-overlay.active { display: flex; }
+    .modal { background: #111; border: 1px solid rgba(201,168,76,0.2); max-width: 700px; width: 100%; max-height: 80vh; overflow-y: auto; padding: 2rem; position: relative; }
+    .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(201,168,76,0.1); }
+    .modal-header h3 { font-family: 'Cinzel', serif; color: #C9A84C; }
+    .modal-close { background: none; border: none; color: #666; font-size: 1.5rem; cursor: pointer; transition: color 0.3s; }
+    .modal-close:hover { color: #CC0000; }
+    .modal-answer { padding: 0.75rem 0; border-bottom: 1px solid rgba(255,255,255,0.03); }
+    .modal-answer-q { font-size: 0.75rem; color: #C9A84C; font-family: 'Cinzel', serif; margin-bottom: 0.3rem; }
+    .modal-answer-a { font-size: 0.9rem; color: #888; line-height: 1.6; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">ITALIANO</a>
+  <div class="nav-right">
+    <a href="/">الرئيسية</a>
+    <a href="/apply">التقديم</a>
+    <div class="user-chip" id="userChip" style="display:none">
+      <img id="userAvatar" src="" alt="">
+      <span id="userName"></span>
+    </div>
+    <a href="/auth/logout" style="color:#CC0000">خروج</a>
+  </div>
+</nav>
+
+<div id="unauthorizedBox" class="unauthorized" style="display:none">
+  <h1>⛔</h1>
+  <h1 style="font-size:1.5rem; margin-bottom:0.5rem;">غير مسموح</h1>
+  <p>مش عندك صلاحية للدخول للوحة التحكم</p>
+  <a href="/" class="back-btn">رجوع للموقع</a>
+</div>
+
+<div id="dashboardBox" class="dashboard" style="display:none">
+  <div class="dash-header">
+    <h1>⚙️ لوحة التحكم</h1>
+    <p>إدارة العيلة والتقديمات</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-icon">📋</div>
+      <span class="stat-num" id="totalApps">0</span>
+      <span class="stat-label">إجمالي التقديمات</span>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon">📅</div>
+      <span class="stat-num" id="todayApps">0</span>
+      <span class="stat-label">تقديمات اليوم</span>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon">🔓</div>
+      <span class="stat-num" id="applyStatusNum">مغلق</span>
+      <span class="stat-label">حالة التقديم</span>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon">👥</div>
+      <span class="stat-num" id="uniqueApps">0</span>
+      <span class="stat-label">متقدمين فريدين</span>
+    </div>
+  </div>
+
+  <!-- Apply Control -->
+  <div class="control-section">
+    <h2>🎛️ التحكم في التقديم</h2>
+    <div class="apply-control">
+      <div class="apply-status">
+        <div class="status-dot" id="statusDot"></div>
+        <span class="status-text" id="statusText">جاري التحميل...</span>
+      </div>
+      <button class="toggle-apply-btn" id="toggleBtn" onclick="toggleStatus()">جاري التحميل...</button>
+    </div>
+  </div>
+
+  <!-- Applications -->
+  <div class="control-section">
+    <h2>📋 التقديمات</h2>
+    <table class="apps-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>المتقدم</th>
+          <th>الاسم في الخادم</th>
+          <th>التاريخ</th>
+          <th>عرض</th>
+        </tr>
+      </thead>
+      <tbody id="appsTableBody">
+        <tr><td colspan="5" class="empty-table"><p>جاري التحميل...</p></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="modalTitle">تفاصيل التقديم</h3>
+      <button class="modal-close" onclick="document.getElementById('modalOverlay').classList.remove('active')">✕</button>
+    </div>
+    <div id="modalBody"></div>
+  </div>
+</div>
+
+<script>
+const questions = [
+  'الاسم في الخادم','الايدي في الخادم','عدد الساعات','المخالفات الإدارية',
+  'قاعدة TK','قاعدة DM','قاعدة VDM','قاعدة SK','قاعدة PG','قاعدة MG',
+  'قاعدة SL','قاعدة SP','قاعدة WS','قاعدة RK','قاعدة GR',
+  'مهمتك في العيلة','تصرفك مع مواطن','تصرفك مع شخص يسأل'
+];
+
+let allApps = [];
+
+async function init() {
+  const [userRes, foundersRes] = await Promise.all([
+    fetch('/auth/user'),
+    fetch('/api/founders')
+  ]);
+  const user = await userRes.json();
+  const { ids } = await foundersRes.json();
+
+  if (!user) { window.location.href = '/auth/discord'; return; }
+  if (!ids.includes(user.id)) {
+    document.getElementById('unauthorizedBox').style.display = 'flex';
+    return;
+  }
+
+  document.getElementById('userChip').style.display = 'flex';
+  document.getElementById('userAvatar').src = user.avatar;
+  document.getElementById('userName').textContent = user.username;
+  document.getElementById('dashboardBox').style.display = 'block';
+
+  await loadStatus();
+  await loadApps();
+}
+
+async function loadStatus() {
+  const res = await fetch('/api/status');
+  const { open } = await res.json();
+  updateStatusUI(open);
+}
+
+function updateStatusUI(open) {
+  const dot = document.getElementById('statusDot');
+  const text = document.getElementById('statusText');
+  const btn = document.getElementById('toggleBtn');
+  const num = document.getElementById('applyStatusNum');
+
+  dot.className = 'status-dot ' + (open ? 'dot-open' : 'dot-closed');
+  text.textContent = open ? 'التقديم مفتوح الآن' : 'التقديم مغلق حالياً';
+  num.textContent = open ? 'مفتوح' : 'مغلق';
+  btn.textContent = open ? '🔒 إغلاق التقديم' : '✅ فتح التقديم';
+  btn.className = 'toggle-apply-btn ' + (open ? 'btn-close' : 'btn-open');
+}
+
+async function toggleStatus() {
+  const res = await fetch('/api/toggle', { method: 'POST' });
+  const data = await res.json();
+  if (data.error) return alert(data.error);
+  updateStatusUI(data.open);
+}
+
+async function loadApps() {
+  const res = await fetch('/api/all-applications');
+  allApps = await res.json();
+
+  document.getElementById('totalApps').textContent = allApps.length;
+
+  const today = new Date().toDateString();
+  const todayCount = allApps.filter(a => new Date(a.created_at).toDateString() === today).length;
+  document.getElementById('todayApps').textContent = todayCount;
+
+  const unique = new Set(allApps.map(a => a.discord_id)).size;
+  document.getElementById('uniqueApps').textContent = unique;
+
+  const tbody = document.getElementById('appsTableBody');
+  if (allApps.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="5" class="empty-table"><p>لا توجد تقديمات بعد</p></td></tr>';
+    return;
+  }
+
+  tbody.innerHTML = allApps.map((app, i) => `
+    <tr>
+      <td style="color:#444">${i + 1}</td>
+      <td>
+        <div class="user-cell">
+          <img src="${app.avatar || 'https://cdn.discordapp.com/embed/avatars/0.png'}" alt="">
+          <span>${app.username}</span>
+        </div>
+      </td>
+      <td>${app.answers[0] || '—'}</td>
+      <td>${new Date(app.created_at).toLocaleDateString('ar-EG')}</td>
+      <td><button class="view-btn" onclick="viewApp(${i})">عرض</button></td>
+    </tr>
+  `).join('');
+}
+
+function viewApp(index) {
+  const app = allApps[index];
+  document.getElementById('modalTitle').textContent = `تقديم — ${app.username}`;
+  document.getElementById('modalBody').innerHTML = app.answers.map((ans, i) => `
+    <div class="modal-answer">
+      <div class="modal-answer-q">${questions[i] || `سؤال ${i+1}`}</div>
+      <div class="modal-answer-a">${ans || 'لم يجب'}</div>
+    </div>
+  `).join('');
+  document.getElementById('modalOverlay').classList.add('active');
+}
+
+function closeModal(e) {
+  if (e.target === document.getElementById('modalOverlay')) {
+    document.getElementById('modalOverlay').classList.remove('active');
+  }
+}
+
+init();
+</script>
+</body>
+</html>
