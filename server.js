@@ -25,7 +25,7 @@ app.use(passport.session());
 passport.use(new DiscordStrategy({
   clientID: process.env.DISCORD_CLIENT_ID,
   clientSecret: process.env.DISCORD_CLIENT_SECRET,
-  callbackURL: process.env.REDIRECT_URI || 'http://localhost:3000/auth/callback',
+  callbackURL: process.env.REDIRECT_URI,
   scope: ['identify']
 }, (accessToken, refreshToken, profile, done) => {
   return done(null, profile);
