@@ -8,28 +8,28 @@
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { background: #0A0A0A; color: #F5F0E8; font-family: 'Tajawal', sans-serif; min-height: 100vh; }
- 
+
     nav {
       display: flex; align-items: center; justify-content: space-between;
       padding: 1.2rem 4rem;
       background: rgba(10,10,10,0.95);
       border-bottom: 1px solid rgba(201,168,76,0.2);
     }
- 
+
     .nav-logo { font-family: 'Cinzel', serif; font-size: 1.4rem; color: #C9A84C; text-decoration: none; letter-spacing: 4px; }
- 
+
     .user-info { display: flex; align-items: center; gap: 0.75rem; }
     .user-info img { width: 36px; height: 36px; border-radius: 50%; border: 2px solid #C9A84C; }
     .user-info span { font-size: 0.9rem; color: #C9A84C; }
     .logout-btn { font-size: 0.75rem; color: #888; text-decoration: none; margin-right: 1rem; }
     .logout-btn:hover { color: #CC0000; }
- 
+
     .container { max-width: 800px; margin: 4rem auto; padding: 0 2rem; }
- 
+
     .page-header { text-align: center; margin-bottom: 3rem; }
     .page-header h1 { font-family: 'Cinzel', serif; font-size: 2.5rem; color: #C9A84C; margin-bottom: 0.5rem; }
     .page-header p { color: #888; font-size: 0.95rem; }
- 
+
     .status-badge {
       display: inline-block;
       padding: 0.4rem 1.2rem;
@@ -41,20 +41,20 @@
     }
     .status-open { background: rgba(0,100,0,0.3); color: #00CC00; border: 1px solid #00CC00; }
     .status-closed { background: rgba(139,0,0,0.3); color: #CC0000; border: 1px solid #CC0000; }
- 
+
     .conditions {
       background: #111;
       border: 1px solid rgba(201,168,76,0.2);
       padding: 1.5rem 2rem;
       margin-bottom: 2rem;
     }
- 
+
     .conditions h3 { font-family: 'Cinzel', serif; color: #C9A84C; margin-bottom: 1rem; font-size: 1rem; letter-spacing: 2px; }
     .conditions ul { list-style: none; }
     .conditions li { color: #888; padding: 0.4rem 0; font-size: 0.95rem; border-bottom: 1px solid rgba(255,255,255,0.05); }
     .conditions li:last-child { border-bottom: none; }
     .conditions li::before { content: '⚜ '; color: #C9A84C; }
- 
+
     .form-group { margin-bottom: 1.5rem; }
     .form-group label { display: block; font-size: 0.85rem; color: #C9A84C; letter-spacing: 1px; margin-bottom: 0.5rem; font-family: 'Cinzel', serif; }
     .form-group input, .form-group textarea {
@@ -72,9 +72,9 @@
       outline: none;
       border-color: rgba(201,168,76,0.6);
     }
- 
+
     .img-upload-note { font-size: 0.8rem; color: #666; margin-top: 0.4rem; }
- 
+
     .submit-btn {
       width: 100%;
       padding: 1.2rem;
@@ -90,7 +90,7 @@
     }
     .submit-btn:hover { background: #CC0000; }
     .submit-btn:disabled { background: #333; border-color: #444; color: #666; cursor: not-allowed; }
- 
+
     .login-box { text-align: center; padding: 4rem 2rem; }
     .login-box h2 { font-family: 'Cinzel', serif; color: #C9A84C; margin-bottom: 1rem; }
     .login-box p { color: #888; margin-bottom: 2rem; }
@@ -101,15 +101,15 @@
       font-size: 0.85rem; letter-spacing: 2px; transition: all 0.3s;
     }
     .discord-login:hover { background: #4752C4; transform: translateY(-2px); }
- 
+
     .closed-box { text-align: center; padding: 3rem; background: #111; border: 1px solid rgba(139,0,0,0.3); }
     .closed-box h2 { font-family: 'Cinzel', serif; color: #CC0000; margin-bottom: 1rem; }
     .closed-box p { color: #888; }
- 
+
     .success-box { text-align: center; padding: 3rem; background: #111; border: 1px solid rgba(0,100,0,0.3); display: none; }
     .success-box h2 { font-family: 'Cinzel', serif; color: #00CC00; margin-bottom: 1rem; }
     .success-box p { color: #888; }
- 
+
     .section-divider {
       text-align: center;
       margin: 2rem 0;
@@ -118,7 +118,7 @@
       font-size: 0.8rem;
       letter-spacing: 3px;
     }
- 
+
     .admin-panel {
       background: #111;
       border: 1px solid rgba(201,168,76,0.3);
@@ -141,25 +141,29 @@
   </style>
 </head>
 <body>
- 
+
 <nav>
   <a href="/" class="nav-logo">ITALIANO</a>
+  <div style="display:flex; gap:1.5rem; align-items:center;">
+    <a href="/" style="color:#888; text-decoration:none; font-size:0.9rem;">الرئيسية</a>
+    <a href="/my-applications" style="color:#888; text-decoration:none; font-size:0.9rem;">تقديماتي</a>
+  </div>
   <div class="user-info" id="userInfo" style="display:none">
     <img id="userAvatar" src="" alt="">
     <span id="userName"></span>
     <a href="/auth/logout" class="logout-btn">خروج</a>
   </div>
 </nav>
- 
+
 <div class="container">
- 
+
   <!-- Admin Panel -->
   <div class="admin-panel" id="adminPanel">
     <h3>⚙️ لوحة التحكم</h3>
     <p style="color:#888; margin-bottom:1rem; font-size:0.9rem;">تحكم في حالة التقديم</p>
     <button class="toggle-btn" id="toggleBtn" onclick="toggleStatus()">جاري التحميل...</button>
   </div>
- 
+
   <!-- Not Logged In -->
   <div id="loginBox" class="login-box" style="display:none">
     <h2>سجل دخول للتقديم</h2>
@@ -171,19 +175,19 @@
       تسجيل الدخول بـ Discord
     </a>
   </div>
- 
+
   <!-- Closed -->
   <div id="closedBox" class="closed-box" style="display:none">
     <h2>🔒 التقديم مغلق</h2>
     <p>التقديم على العيلة مغلق حالياً، تابع الإعلانات لمعرفة موعد الفتح.</p>
   </div>
- 
+
   <!-- Success -->
   <div id="successBox" class="success-box">
     <h2>✅ تم إرسال تقديمك!</h2>
     <p>شكراً! سيتم مراجعة تقديمك والرد عليك قريباً.</p>
   </div>
- 
+
   <!-- Form -->
   <div id="applyForm" style="display:none">
     <div class="page-header">
@@ -191,7 +195,7 @@
       <h1>التقديم للعيلة</h1>
       <p>تأكد من قراءة الشروط قبل التقديم</p>
     </div>
- 
+
     <div class="conditions">
       <h3>⚜ شروط التقديم</h3>
       <ul>
@@ -200,139 +204,139 @@
         <li>عدد ساعات لا يقل عن 150 ساعة</li>
       </ul>
     </div>
- 
+
     <form id="theForm">
- 
+
       <div class="section-divider">— معلومات أساسية —</div>
- 
+
       <div class="form-group">
         <label>1. اسمك في الخادم</label>
         <input type="text" id="q1" placeholder="اكتب اسمك كما يظهر في الخادم" required>
       </div>
- 
+
       <div class="form-group">
         <label>2. الايدي الخاص بك في الخادم</label>
         <input type="text" id="q2" placeholder="مثال: 12345" required>
       </div>
- 
+
       <div class="form-group">
         <label>3. عدد ساعاتك (مع رابط الصورة)</label>
         <input type="text" id="q3" placeholder="عدد الساعات — رابط الصورة" required>
         <p class="img-upload-note">ارفع الصورة على Discord وانسخ الرابط هنا</p>
       </div>
- 
+
       <div class="form-group">
         <label>4. عدد المخالفات الإدارية (مع رابط الصورة)</label>
         <input type="text" id="q4" placeholder="عدد المخالفات — رابط الصورة" required>
         <p class="img-upload-note">ارفع الصورة على Discord وانسخ الرابط هنا</p>
       </div>
- 
+
       <div class="section-divider">— القواعد —</div>
- 
+
       <div class="form-group">
         <label>5. عرّف قاعدة TK</label>
         <textarea id="q5" rows="3" placeholder="اكتب تعريف قاعدة TK..." required></textarea>
       </div>
- 
+
       <div class="form-group">
         <label>6. عرّف قاعدة DM</label>
         <textarea id="q6" rows="3" placeholder="اكتب تعريف قاعدة DM..." required></textarea>
       </div>
- 
+
       <div class="form-group">
         <label>7. عرّف قاعدة VDM</label>
         <textarea id="q7" rows="3" placeholder="اكتب تعريف قاعدة VDM..." required></textarea>
       </div>
- 
+
       <div class="form-group">
         <label>8. عرّف قاعدة SK</label>
         <textarea id="q8" rows="3" placeholder="اكتب تعريف قاعدة SK..." required></textarea>
       </div>
- 
+
       <div class="form-group">
         <label>9. عرّف قاعدة PG</label>
         <textarea id="q9" rows="3" placeholder="اكتب تعريف قاعدة PG..." required></textarea>
       </div>
- 
+
       <div class="form-group">
         <label>10. عرّف قاعدة MG</label>
         <textarea id="q10" rows="3" placeholder="اكتب تعريف قاعدة MG..." required></textarea>
       </div>
- 
+
       <div class="form-group">
         <label>11. عرّف قاعدة SL</label>
         <textarea id="q11" rows="3" placeholder="اكتب تعريف قاعدة SL..." required></textarea>
       </div>
- 
+
       <div class="form-group">
         <label>12. عرّف قاعدة SP</label>
         <textarea id="q12" rows="3" placeholder="اكتب تعريف قاعدة SP..." required></textarea>
       </div>
- 
+
       <div class="form-group">
         <label>13. عرّف قاعدة WS</label>
         <textarea id="q13" rows="3" placeholder="اكتب تعريف قاعدة WS..." required></textarea>
       </div>
- 
+
       <div class="form-group">
         <label>14. عرّف قاعدة RK</label>
         <textarea id="q14" rows="3" placeholder="اكتب تعريف قاعدة RK..." required></textarea>
       </div>
- 
+
       <div class="form-group">
         <label>15. عرّف قاعدة GR</label>
         <textarea id="q15" rows="3" placeholder="اكتب تعريف قاعدة GR..." required></textarea>
       </div>
- 
+
       <div class="section-divider">— أسئلة العيلة —</div>
- 
+
       <div class="form-group">
         <label>16. ما هي مهمتك كفرد من أفراد العيلة؟</label>
         <textarea id="q16" rows="4" placeholder="اكتب إجابتك..." required></textarea>
       </div>
- 
+
       <div class="form-group">
         <label>17. كيف تتصرف إذا طلب منك مواطن خدمة من العيلة؟</label>
         <textarea id="q17" rows="4" placeholder="اكتب إجابتك..." required></textarea>
       </div>
- 
+
       <div class="form-group">
         <label>18. ما تصرفك إذا سألك شخص عن العيلة وطريقة التقديم؟</label>
         <textarea id="q18" rows="4" placeholder="اكتب إجابتك..." required></textarea>
       </div>
- 
+
       <button type="submit" class="submit-btn">⚜ إرسال التقديم ⚜</button>
     </form>
   </div>
- 
+
 </div>
- 
+
 <script>
 const FOUNDER_IDS = [];
 let currentUser = null;
 let isOpen = false;
- 
+
 async function init() {
   try {
     const [userRes, statusRes] = await Promise.all([
       fetch('/auth/user'),
       fetch('/api/status')
     ]);
- 
+
     currentUser = await userRes.json();
     const status = await statusRes.json();
     isOpen = status.open;
- 
+
     if (currentUser) {
       document.getElementById('userInfo').style.display = 'flex';
       document.getElementById('userAvatar').src = currentUser.avatar;
       document.getElementById('userName').textContent = currentUser.username;
- 
+
       if (FOUNDER_IDS.includes(currentUser.id)) {
         document.getElementById('adminPanel').style.display = 'block';
         updateToggleBtn();
       }
- 
+
       if (!isOpen) {
         document.getElementById('closedBox').style.display = 'block';
       } else {
@@ -345,7 +349,7 @@ async function init() {
     document.getElementById('loginBox').style.display = 'block';
   }
 }
- 
+
 function updateToggleBtn() {
   const btn = document.getElementById('toggleBtn');
   if (isOpen) {
@@ -356,14 +360,14 @@ function updateToggleBtn() {
     btn.className = 'toggle-btn toggle-open';
   }
 }
- 
+
 async function toggleStatus() {
   const res = await fetch('/api/toggle', { method: 'POST' });
   const data = await res.json();
   if (data.error) return alert(data.error);
   isOpen = data.open;
   updateToggleBtn();
- 
+
   if (isOpen) {
     document.getElementById('closedBox').style.display = 'none';
     document.getElementById('applyForm').style.display = 'block';
@@ -372,24 +376,24 @@ async function toggleStatus() {
     document.getElementById('closedBox').style.display = 'block';
   }
 }
- 
+
 document.getElementById('theForm')?.addEventListener('submit', async (e) => {
   e.preventDefault();
   const btn = document.querySelector('.submit-btn');
   btn.disabled = true;
   btn.textContent = 'جاري الإرسال...';
- 
+
   const answers = [];
   for (let i = 1; i <= 18; i++) {
     answers.push(document.getElementById(`q${i}`)?.value || '');
   }
- 
+
   const res = await fetch('/api/apply', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ answers })
   });
- 
+
   if (res.ok) {
     document.getElementById('applyForm').style.display = 'none';
     document.getElementById('successBox').style.display = 'block';
@@ -400,9 +404,8 @@ document.getElementById('theForm')?.addEventListener('submit', async (e) => {
     btn.textContent = '⚜ إرسال التقديم ⚜';
   }
 });
- 
+
 init();
 </script>
 </body>
 </html>
- 
