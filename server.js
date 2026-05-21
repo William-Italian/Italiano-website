@@ -77,6 +77,10 @@ app.get('/my-applications', (req, res) => {
   res.sendFile(path.join(__dirname, 'website/my-applications.html'));
 });
 
+app.get('/admin', (req, res) => {
+  res.sendFile(path.join(__dirname, 'website/admin.html'));
+});
+
 // ===================== AUTH =====================
 app.get('/auth/discord', passport.authenticate('discord'));
 
@@ -200,6 +204,15 @@ app.get('/api/my-applications', async (req, res) => {
     'SELECT * FROM applications WHERE discord_id = $1 ORDER BY created_at DESC',
     [req.user.id]
   );
+  res.json(result.rows);
+});
+
+// كل التقديمات للـ Admin
+app.get('/api/all-applications', async (req, res) => {
+  if (!req.isAuthenticated()) return res.status(401).json({ error: 'غير مسموح' });
+  const allowedIDs = process.env.FOUNDER_IDS?.split(',') || [];
+  if (!allowedIDs.includes(req.user.id)) return res.status(403).json({ error: 'غير مسموح' });
+  const result = await pool.query('SELECT * FROM applications ORDER BY created_at DESC');
   res.json(result.rows);
 });
 
