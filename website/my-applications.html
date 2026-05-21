@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تقديماتي — ITALIANO</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Tajawal:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #0A0A0A; color: #F5F0E8; font-family: 'Tajawal', sans-serif; min-height: 100vh; }
+
+    nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.2rem 4rem;
+      background: rgba(10,10,10,0.95);
+      border-bottom: 1px solid rgba(201,168,76,0.2);
+    }
+
+    .nav-logo { font-family: 'Cinzel', serif; font-size: 1.4rem; color: #C9A84C; text-decoration: none; letter-spacing: 4px; }
+
+    .nav-links { display: flex; align-items: center; gap: 1.5rem; }
+    .nav-links a { color: #888; text-decoration: none; font-size: 0.9rem; transition: color 0.3s; }
+    .nav-links a:hover { color: #C9A84C; }
+
+    .user-info { display: flex; align-items: center; gap: 0.75rem; }
+    .user-info img { width: 36px; height: 36px; border-radius: 50%; border: 2px solid #C9A84C; }
+    .user-info span { font-size: 0.9rem; color: #C9A84C; }
+    .logout-btn { font-size: 0.75rem; color: #888; text-decoration: none; }
+    .logout-btn:hover { color: #CC0000; }
+
+    .container { max-width: 900px; margin: 4rem auto; padding: 0 2rem; }
+
+    .page-header { text-align: center; margin-bottom: 3rem; }
+    .page-header h1 { font-family: 'Cinzel', serif; font-size: 2rem; color: #C9A84C; margin-bottom: 0.5rem; }
+    .page-header p { color: #888; }
+
+    .login-box { text-align: center; padding: 4rem 2rem; }
+    .login-box h2 { font-family: 'Cinzel', serif; color: #C9A84C; margin-bottom: 1rem; }
+    .login-box p { color: #888; margin-bottom: 2rem; }
+    .discord-login {
+      display: inline-flex; align-items: center; gap: 0.75rem;
+      background: #5865F2; color: white; padding: 1rem 2.5rem;
+      text-decoration: none; font-family: 'Cinzel', serif;
+      font-size: 0.85rem; letter-spacing: 2px; transition: all 0.3s;
+    }
+    .discord-login:hover { background: #4752C4; transform: translateY(-2px); }
+
+    .no-apps { text-align: center; padding: 3rem; background: #111; border: 1px solid rgba(201,168,76,0.15); }
+    .no-apps h2 { font-family: 'Cinzel', serif; color: #888; margin-bottom: 1rem; }
+    .no-apps a { color: #C9A84C; text-decoration: none; }
+
+    .app-card {
+      background: #111;
+      border: 1px solid rgba(201,168,76,0.15);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      transition: border-color 0.3s;
+    }
+    .app-card:hover { border-color: rgba(201,168,76,0.4); }
+
+    .app-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .app-title { font-family: 'Cinzel', serif; color: #C9A84C; font-size: 1rem; }
+    .app-date { font-size: 0.8rem; color: #666; }
+
+    .app-answers { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+
+    .answer-item { background: #0A0A0A; padding: 0.75rem; border: 1px solid rgba(255,255,255,0.05); }
+    .answer-label { font-size: 0.75rem; color: #C9A84C; margin-bottom: 0.3rem; font-family: 'Cinzel', serif; }
+    .answer-value { font-size: 0.9rem; color: #888; line-height: 1.5; }
+
+    .toggle-details {
+      background: none;
+      border: 1px solid rgba(201,168,76,0.3);
+      color: #C9A84C;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      font-family: 'Cinzel', serif;
+      font-size: 0.75rem;
+      letter-spacing: 1px;
+      margin-top: 1rem;
+      transition: all 0.3s;
+    }
+    .toggle-details:hover { background: rgba(201,168,76,0.1); }
+
+    .apply-btn {
+      display: inline-block;
+      padding: 0.8rem 2rem;
+      background: #8B0000;
+      color: #F5F0E8;
+      text-decoration: none;
+      font-family: 'Cinzel', serif;
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      border: 1px solid #CC0000;
+      transition: all 0.3s;
+      margin-top: 1rem;
+    }
+    .apply-btn:hover { background: #CC0000; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">ITALIANO</a>
+  <div class="nav-links">
+    <a href="/">الرئيسية</a>
+    <a href="/apply">التقديم</a>
+    <div class="user-info" id="userInfo" style="display:none">
+      <img id="userAvatar" src="" alt="">
+      <span id="userName"></span>
+      <a href="/auth/logout" class="logout-btn">خروج</a>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+
+  <div id="loginBox" class="login-box" style="display:none">
+    <h2>سجل دخول أولاً</h2>
+    <p>لازم تسجل دخول عشان تشوف تقديماتك</p>
+    <a href="/auth/discord" class="discord-login">
+      <svg width="22" height="22" viewBox="0 0 127.14 96.36" fill="white">
+        <path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/>
+      </svg>
+      تسجيل الدخول بـ Discord
+    </a>
+  </div>
+
+  <div id="appsContainer" style="display:none">
+    <div class="page-header">
+      <h1>📋 تقديماتي</h1>
+      <p>كل التقديمات اللي بعتها للعيلة</p>
+    </div>
+    <div id="appsList"></div>
+  </div>
+
+</div>
+
+<script>
+const questions = [
+  'الاسم في الخادم',
+  'الايدي في الخادم',
+  'عدد الساعات',
+  'المخالفات الإدارية',
+  'قاعدة TK',
+  'قاعدة DM',
+  'قاعدة VDM',
+  'قاعدة SK',
+  'قاعدة PG',
+  'قاعدة MG',
+  'قاعدة SL',
+  'قاعدة SP',
+  'قاعدة WS',
+  'قاعدة RK',
+  'قاعدة GR',
+  'مهمتك في العيلة',
+  'تصرفك مع مواطن',
+  'تصرفك مع شخص يسأل'
+];
+
+async function init() {
+  const userRes = await fetch('/auth/user');
+  const user = await userRes.json();
+
+  if (!user) {
+    document.getElementById('loginBox').style.display = 'block';
+    return;
+  }
+
+  document.getElementById('userInfo').style.display = 'flex';
+  document.getElementById('userAvatar').src = user.avatar;
+  document.getElementById('userName').textContent = user.username;
+
+  const appsRes = await fetch('/api/my-applications');
+  const apps = await appsRes.json();
+
+  document.getElementById('appsContainer').style.display = 'block';
+  const list = document.getElementById('appsList');
+
+  if (apps.length === 0) {
+    list.innerHTML = `
+      <div class="no-apps">
+        <h2>مفيش تقديمات لحد دلوقتي</h2>
+        <p>لو التقديم مفتوح، <a href="/apply">قدم دلوقتي!</a></p>
+      </div>
+    `;
+    return;
+  }
+
+  apps.forEach((app, index) => {
+    const date = new Date(app.created_at).toLocaleDateString('ar-EG', {
+      year: 'numeric', month: 'long', day: 'numeric',
+      hour: '2-digit', minute: '2-digit'
+    });
+
+    const answersHTML = app.answers.map((ans, i) => `
+      <div class="answer-item">
+        <div class="answer-label">${questions[i] || `سؤال ${i+1}`}</div>
+        <div class="answer-value">${ans || 'لم يجب'}</div>
+      </div>
+    `).join('');
+
+    list.innerHTML += `
+      <div class="app-card">
+        <div class="app-header">
+          <div class="app-title">تقديم #${index + 1}</div>
+          <div class="app-date">${date}</div>
+        </div>
+        <div class="app-answers" id="answers-${index}" style="display:none">
+          ${answersHTML}
+        </div>
+        <button class="toggle-details" onclick="toggleDetails(${index})">عرض التفاصيل ▼</button>
+      </div>
+    `;
+  });
+}
+
+function toggleDetails(index) {
+  const el = document.getElementById(`answers-${index}`);
+  const btn = el.nextElementSibling;
+  if (el.style.display === 'none') {
+    el.style.display = 'grid';
+    btn.textContent = 'إخفاء التفاصيل ▲';
+  } else {
+    el.style.display = 'none';
+    btn.textContent = 'عرض التفاصيل ▼';
+  }
+}
+
+init();
+</script>
+</body>
+</html>
