@@ -312,11 +312,15 @@
 </div>
 
 <script>
-const FOUNDER_IDS = [];
+let FOUNDER_IDS = [];
 let currentUser = null;
 let isOpen = false;
 
 async function init() {
+  const foundersRes = await fetch('/api/founders');
+  const foundersData = await foundersRes.json();
+  FOUNDER_IDS = foundersData.ids;
+
   try {
     const [userRes, statusRes] = await Promise.all([
       fetch('/auth/user'),
