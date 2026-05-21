@@ -90,6 +90,11 @@ app.get('/auth/logout', (req, res) => {
   req.logout(() => res.redirect('/'));
 });
 
+app.get('/api/founders', (req, res) => {
+  const allowedIDs = process.env.FOUNDER_IDS?.split(',') || [];
+  res.json({ ids: allowedIDs });
+});
+
 app.get('/auth/user', (req, res) => {
   if (req.isAuthenticated()) {
     res.json({
