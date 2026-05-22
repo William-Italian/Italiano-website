@@ -4,393 +4,286 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>التقديم — ITALIANO</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Tajawal:wght@300;400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Tajawal:wght@300;400;700&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { background: #0A0A0A; color: #F5F0E8; font-family: 'Tajawal', sans-serif; min-height: 100vh; }
+    body { background: #080808; color: #F5F0E8; font-family: 'Tajawal', sans-serif; min-height: 100vh; }
 
     nav {
       display: flex; align-items: center; justify-content: space-between;
-      padding: 1.2rem 4rem;
-      background: rgba(10,10,10,0.95);
-      border-bottom: 1px solid rgba(201,168,76,0.2);
+      padding: 1rem 3rem;
+      background: rgba(8,8,8,0.98);
+      border-bottom: 1px solid rgba(201,168,76,0.15);
+      position: sticky; top: 0; z-index: 100;
     }
+    .nav-logo { font-family: 'Cinzel', serif; font-size: 1.2rem; color: #C9A84C; text-decoration: none; letter-spacing: 4px; }
+    .nav-right { display: flex; align-items: center; gap: 1.5rem; }
+    .nav-right a { color: #666; text-decoration: none; font-size: 0.85rem; transition: color 0.3s; }
+    .nav-right a:hover { color: #C9A84C; }
+    .user-chip { display: flex; align-items: center; gap: 0.5rem; background: rgba(201,168,76,0.08); border: 1px solid rgba(201,168,76,0.2); padding: 0.4rem 1rem; }
+    .user-chip img { width: 28px; height: 28px; border-radius: 50%; }
+    .user-chip span { font-size: 0.85rem; color: #C9A84C; }
 
-    .nav-logo { font-family: 'Cinzel', serif; font-size: 1.4rem; color: #C9A84C; text-decoration: none; letter-spacing: 4px; }
+    /* Login Box */
+    .login-box { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 80vh; text-align: center; }
+    .login-box h1 { font-family: 'Cinzel', serif; font-size: 2rem; color: #C9A84C; margin-bottom: 1rem; }
+    .login-box p { color: #666; margin-bottom: 2rem; }
+    .discord-btn { display: inline-flex; align-items: center; gap: 0.75rem; background: #5865F2; color: white; padding: 1rem 2.5rem; text-decoration: none; font-family: 'Cinzel', serif; font-size: 0.85rem; letter-spacing: 2px; transition: all 0.3s; }
+    .discord-btn:hover { background: #4752C4; transform: translateY(-2px); }
 
-    .user-info { display: flex; align-items: center; gap: 0.75rem; }
-    .user-info img { width: 36px; height: 36px; border-radius: 50%; border: 2px solid #C9A84C; }
-    .user-info span { font-size: 0.9rem; color: #C9A84C; }
-    .logout-btn { font-size: 0.75rem; color: #888; text-decoration: none; margin-right: 1rem; }
-    .logout-btn:hover { color: #CC0000; }
+    /* Closed Box */
+    .closed-box { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 80vh; text-align: center; }
+    .closed-box h1 { font-family: 'Cinzel', serif; font-size: 2rem; color: #CC0000; margin-bottom: 1rem; }
+    .closed-box p { color: #666; }
 
-    .container { max-width: 800px; margin: 4rem auto; padding: 0 2rem; }
+    /* Apply Container */
+    .apply-container { max-width: 750px; margin: 0 auto; padding: 3rem 2rem; }
 
-    .page-header { text-align: center; margin-bottom: 3rem; }
-    .page-header h1 { font-family: 'Cinzel', serif; font-size: 2.5rem; color: #C9A84C; margin-bottom: 0.5rem; }
-    .page-header p { color: #888; font-size: 0.95rem; }
+    /* Progress Bar */
+    .progress-wrap { margin-bottom: 3rem; }
+    .progress-info { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; }
+    .progress-label { font-family: 'Cinzel', serif; font-size: 0.75rem; color: #C9A84C; letter-spacing: 2px; }
+    .progress-count { font-size: 0.8rem; color: #555; }
+    .progress-bar { width: 100%; height: 2px; background: #1A1A1A; }
+    .progress-fill { height: 100%; background: linear-gradient(to left, #C9A84C, #8B0000); transition: width 0.5s ease; }
 
-    .status-badge {
-      display: inline-block;
-      padding: 0.4rem 1.2rem;
-      font-size: 0.8rem;
-      letter-spacing: 2px;
-      border-radius: 2px;
-      margin-bottom: 1rem;
-      font-family: 'Cinzel', serif;
-    }
-    .status-open { background: rgba(0,100,0,0.3); color: #00CC00; border: 1px solid #00CC00; }
-    .status-closed { background: rgba(139,0,0,0.3); color: #CC0000; border: 1px solid #CC0000; }
+    /* Steps Nav */
+    .steps-nav { display: flex; gap: 0.4rem; margin-bottom: 3rem; flex-wrap: wrap; }
+    .step-dot { width: 8px; height: 8px; border-radius: 50%; background: #1A1A1A; border: 1px solid #333; transition: all 0.3s; cursor: pointer; }
+    .step-dot.active { background: #C9A84C; border-color: #C9A84C; }
+    .step-dot.done { background: #555; border-color: #555; }
 
-    .conditions {
-      background: #111;
-      border: 1px solid rgba(201,168,76,0.2);
-      padding: 1.5rem 2rem;
-      margin-bottom: 2rem;
-    }
+    /* Step Card */
+    .step-card { background: #111; border: 1px solid rgba(201,168,76,0.1); padding: 2.5rem; animation: fadeIn 0.4s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-    .conditions h3 { font-family: 'Cinzel', serif; color: #C9A84C; margin-bottom: 1rem; font-size: 1rem; letter-spacing: 2px; }
-    .conditions ul { list-style: none; }
-    .conditions li { color: #888; padding: 0.4rem 0; font-size: 0.95rem; border-bottom: 1px solid rgba(255,255,255,0.05); }
-    .conditions li:last-child { border-bottom: none; }
-    .conditions li::before { content: '⚜ '; color: #C9A84C; }
+    .step-num { font-family: 'Cinzel', serif; font-size: 0.7rem; color: #555; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 0.5rem; }
+    .step-question { font-family: 'Cinzel', serif; font-size: 1.2rem; color: #F5F0E8; margin-bottom: 0.5rem; line-height: 1.4; }
+    .step-hint { font-size: 0.85rem; color: #555; margin-bottom: 1.5rem; }
 
-    .form-group { margin-bottom: 1.5rem; }
-    .form-group label { display: block; font-size: 0.85rem; color: #C9A84C; letter-spacing: 1px; margin-bottom: 0.5rem; font-family: 'Cinzel', serif; }
-    .form-group input, .form-group textarea {
+    .step-input, .step-textarea {
       width: 100%;
-      background: #111;
-      border: 1px solid rgba(201,168,76,0.2);
+      background: #0A0A0A;
+      border: 1px solid rgba(201,168,76,0.15);
       color: #F5F0E8;
-      padding: 0.9rem 1rem;
+      padding: 1rem 1.2rem;
       font-family: 'Tajawal', sans-serif;
-      font-size: 0.95rem;
+      font-size: 1rem;
       transition: border-color 0.3s;
       resize: vertical;
     }
-    .form-group input:focus, .form-group textarea:focus {
-      outline: none;
-      border-color: rgba(201,168,76,0.6);
-    }
+    .step-input:focus, .step-textarea:focus { outline: none; border-color: rgba(201,168,76,0.5); }
 
-    .img-upload-note { font-size: 0.8rem; color: #666; margin-top: 0.4rem; }
+    /* Conditions Card */
+    .conditions-card { background: #0A0A0A; border: 1px solid rgba(201,168,76,0.1); padding: 1.5rem; margin-bottom: 1.5rem; }
+    .conditions-card h3 { font-family: 'Cinzel', serif; font-size: 0.85rem; color: #C9A84C; letter-spacing: 2px; margin-bottom: 1rem; }
+    .condition-item { display: flex; align-items: center; gap: 0.75rem; padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.03); }
+    .condition-item:last-child { border-bottom: none; }
+    .condition-icon { color: #C9A84C; font-size: 0.8rem; }
+    .condition-text { font-size: 0.9rem; color: #888; }
 
-    .submit-btn {
-      width: 100%;
-      padding: 1.2rem;
-      background: #8B0000;
-      color: #F5F0E8;
-      border: 1px solid #CC0000;
-      font-family: 'Cinzel', serif;
-      font-size: 0.9rem;
-      letter-spacing: 3px;
-      cursor: pointer;
-      transition: all 0.3s;
-      text-transform: uppercase;
-    }
-    .submit-btn:hover { background: #CC0000; }
-    .submit-btn:disabled { background: #333; border-color: #444; color: #666; cursor: not-allowed; }
+    /* Nav Buttons */
+    .nav-btns { display: flex; gap: 1rem; margin-top: 2rem; }
+    .btn-prev { flex: 1; padding: 1rem; background: transparent; border: 1px solid rgba(255,255,255,0.1); color: #666; font-family: 'Cinzel', serif; font-size: 0.8rem; letter-spacing: 2px; cursor: pointer; transition: all 0.3s; }
+    .btn-prev:hover { border-color: rgba(255,255,255,0.2); color: #888; }
+    .btn-next { flex: 2; padding: 1rem; background: linear-gradient(135deg, #8B0000, #C9A84C10); border: 1px solid #8B0000; color: #F5F0E8; font-family: 'Cinzel', serif; font-size: 0.8rem; letter-spacing: 2px; cursor: pointer; transition: all 0.3s; }
+    .btn-next:hover { background: linear-gradient(135deg, #AA0000, #C9A84C20); transform: translateY(-1px); }
+    .btn-submit { flex: 2; padding: 1rem; background: linear-gradient(135deg, #C9A84C, #8B0000); border: none; color: #F5F0E8; font-family: 'Cinzel', serif; font-size: 0.8rem; letter-spacing: 2px; cursor: pointer; transition: all 0.3s; }
+    .btn-submit:hover { opacity: 0.9; transform: translateY(-1px); }
+    .btn-submit:disabled { opacity: 0.5; cursor: not-allowed; }
 
-    .login-box { text-align: center; padding: 4rem 2rem; }
-    .login-box h2 { font-family: 'Cinzel', serif; color: #C9A84C; margin-bottom: 1rem; }
-    .login-box p { color: #888; margin-bottom: 2rem; }
-    .discord-login {
-      display: inline-flex; align-items: center; gap: 0.75rem;
-      background: #5865F2; color: white; padding: 1rem 2.5rem;
-      text-decoration: none; font-family: 'Cinzel', serif;
-      font-size: 0.85rem; letter-spacing: 2px; transition: all 0.3s;
-    }
-    .discord-login:hover { background: #4752C4; transform: translateY(-2px); }
-
-    .closed-box { text-align: center; padding: 3rem; background: #111; border: 1px solid rgba(139,0,0,0.3); }
-    .closed-box h2 { font-family: 'Cinzel', serif; color: #CC0000; margin-bottom: 1rem; }
-    .closed-box p { color: #888; }
-
-    .success-box { text-align: center; padding: 3rem; background: #111; border: 1px solid rgba(0,100,0,0.3); display: none; }
-    .success-box h2 { font-family: 'Cinzel', serif; color: #00CC00; margin-bottom: 1rem; }
-    .success-box p { color: #888; }
-
-    .section-divider {
-      text-align: center;
-      margin: 2rem 0;
-      font-family: 'Cinzel', serif;
-      color: #C9A84C;
-      font-size: 0.8rem;
-      letter-spacing: 3px;
-    }
-
-    .admin-panel {
-      background: #111;
-      border: 1px solid rgba(201,168,76,0.3);
-      padding: 1.5rem;
-      margin-bottom: 2rem;
-      display: none;
-    }
-    .admin-panel h3 { font-family: 'Cinzel', serif; color: #C9A84C; margin-bottom: 1rem; }
-    .toggle-btn {
-      padding: 0.8rem 2rem;
-      font-family: 'Cinzel', serif;
-      font-size: 0.8rem;
-      letter-spacing: 2px;
-      cursor: pointer;
-      border: none;
-      transition: all 0.3s;
-    }
-    .toggle-open { background: #006400; color: white; }
-    .toggle-close { background: #8B0000; color: white; }
+    /* Success */
+    .success-box { text-align: center; padding: 4rem 2rem; }
+    .success-icon { font-size: 4rem; margin-bottom: 1.5rem; }
+    .success-box h1 { font-family: 'Cinzel', serif; font-size: 1.8rem; color: #C9A84C; margin-bottom: 1rem; }
+    .success-box p { color: #666; margin-bottom: 2rem; line-height: 2; }
+    .success-box a { color: #C9A84C; text-decoration: none; border: 1px solid rgba(201,168,76,0.3); padding: 0.8rem 2rem; font-family: 'Cinzel', serif; font-size: 0.8rem; letter-spacing: 2px; transition: all 0.3s; }
+    .success-box a:hover { background: rgba(201,168,76,0.1); }
   </style>
 </head>
 <body>
 
 <nav>
   <a href="/" class="nav-logo">ITALIANO</a>
-  <div style="display:flex; gap:1.5rem; align-items:center;">
-    <a href="/" style="color:#888; text-decoration:none; font-size:0.9rem;">الرئيسية</a>
-    <a href="/my-applications" style="color:#888; text-decoration:none; font-size:0.9rem;">تقديماتي</a>
-  </div>
-  <div class="user-info" id="userInfo" style="display:none">
-    <img id="userAvatar" src="" alt="">
-    <span id="userName"></span>
-    <a href="/auth/logout" class="logout-btn">خروج</a>
+  <div class="nav-right">
+    <a href="/">الرئيسية</a>
+    <a href="/my-applications">تقديماتي</a>
+    <div class="user-chip" id="userChip" style="display:none">
+      <img id="userAvatar" src="" alt="">
+      <span id="userName"></span>
+    </div>
+    <a href="/auth/logout" style="color:#CC0000">خروج</a>
   </div>
 </nav>
 
-<div class="container">
+<!-- Login -->
+<div id="loginBox" class="login-box" style="display:none">
+  <h1>⚜ التقديم للعيلة</h1>
+  <p>سجل دخول بحساب Discord للمتابعة</p>
+  <a href="/auth/discord" class="discord-btn">
+    <svg width="20" height="20" viewBox="0 0 127.14 96.36" fill="white"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/></svg>
+    تسجيل الدخول بـ Discord
+  </a>
+</div>
 
-  <!-- Admin Panel -->
-  <div class="admin-panel" id="adminPanel">
-    <h3>⚙️ لوحة التحكم</h3>
-    <p style="color:#888; margin-bottom:1rem; font-size:0.9rem;">تحكم في حالة التقديم</p>
-    <button class="toggle-btn" id="toggleBtn" onclick="toggleStatus()">جاري التحميل...</button>
-  </div>
+<!-- Closed -->
+<div id="closedBox" class="closed-box" style="display:none">
+  <h1>🔒 التقديم مغلق</h1>
+  <p>تابع الإعلانات لمعرفة موعد الفتح</p>
+</div>
 
-  <!-- Not Logged In -->
-  <div id="loginBox" class="login-box" style="display:none">
-    <h2>سجل دخول للتقديم</h2>
-    <p>لازم تسجل دخول بحساب Discord عشان تقدر تتقدم للعيلة</p>
-    <a href="/auth/discord" class="discord-login">
-      <svg width="22" height="22" viewBox="0 0 127.14 96.36" fill="white">
-        <path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/>
-      </svg>
-      تسجيل الدخول بـ Discord
-    </a>
-  </div>
+<!-- Success -->
+<div id="successBox" class="success-box" style="display:none">
+  <div class="success-icon">✅</div>
+  <h1>تم إرسال تقديمك!</h1>
+  <p>شكراً على تقديمك للانضمام لعيلة ITALIANO<br>سيتم مراجعة طلبك والرد عليك في أقرب وقت</p>
+  <a href="/my-applications">عرض تقديماتي</a>
+</div>
 
-  <!-- Closed -->
-  <div id="closedBox" class="closed-box" style="display:none">
-    <h2>🔒 التقديم مغلق</h2>
-    <p>التقديم على العيلة مغلق حالياً، تابع الإعلانات لمعرفة موعد الفتح.</p>
-  </div>
-
-  <!-- Success -->
-  <div id="successBox" class="success-box">
-    <h2>✅ تم إرسال تقديمك!</h2>
-    <p>شكراً! سيتم مراجعة تقديمك والرد عليك قريباً.</p>
-  </div>
-
-  <!-- Form -->
-  <div id="applyForm" style="display:none">
-    <div class="page-header">
-      <span class="status-badge status-open" id="statusBadge">التقديم مفتوح ✓</span>
-      <h1>التقديم للعيلة</h1>
-      <p>تأكد من قراءة الشروط قبل التقديم</p>
+<!-- Apply Form -->
+<div id="applyBox" class="apply-container" style="display:none">
+  <div class="progress-wrap">
+    <div class="progress-info">
+      <span class="progress-label">التقديم للعيلة</span>
+      <span class="progress-count" id="progressCount">1 / 19</span>
     </div>
-
-    <div class="conditions">
-      <h3>⚜ شروط التقديم</h3>
-      <ul>
-        <li>سجل إداري لا يتعدى 3 مخالفات</li>
-        <li>مستوى فوق 20</li>
-        <li>عدد ساعات لا يقل عن 150 ساعة</li>
-      </ul>
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill" style="width: 5%"></div>
     </div>
-
-    <form id="theForm">
-
-      <div class="section-divider">— معلومات أساسية —</div>
-
-      <div class="form-group">
-        <label>1. اسمك في الخادم</label>
-        <input type="text" id="q1" placeholder="اكتب اسمك كما يظهر في الخادم" required>
-      </div>
-
-      <div class="form-group">
-        <label>2. الايدي الخاص بك في الخادم</label>
-        <input type="text" id="q2" placeholder="مثال: 12345" required>
-      </div>
-
-      <div class="form-group">
-        <label>3. عدد ساعاتك (مع رابط الصورة)</label>
-        <input type="text" id="q3" placeholder="عدد الساعات — رابط الصورة" required>
-        <p class="img-upload-note">ارفع الصورة على Discord وانسخ الرابط هنا</p>
-      </div>
-
-      <div class="form-group">
-        <label>4. عدد المخالفات الإدارية (مع رابط الصورة)</label>
-        <input type="text" id="q4" placeholder="عدد المخالفات — رابط الصورة" required>
-        <p class="img-upload-note">ارفع الصورة على Discord وانسخ الرابط هنا</p>
-      </div>
-
-      <div class="section-divider">— القواعد —</div>
-
-      <div class="form-group">
-        <label>5. عرّف قاعدة TK</label>
-        <textarea id="q5" rows="3" placeholder="اكتب تعريف قاعدة TK..." required></textarea>
-      </div>
-
-      <div class="form-group">
-        <label>6. عرّف قاعدة DM</label>
-        <textarea id="q6" rows="3" placeholder="اكتب تعريف قاعدة DM..." required></textarea>
-      </div>
-
-      <div class="form-group">
-        <label>7. عرّف قاعدة VDM</label>
-        <textarea id="q7" rows="3" placeholder="اكتب تعريف قاعدة VDM..." required></textarea>
-      </div>
-
-      <div class="form-group">
-        <label>8. عرّف قاعدة SK</label>
-        <textarea id="q8" rows="3" placeholder="اكتب تعريف قاعدة SK..." required></textarea>
-      </div>
-
-      <div class="form-group">
-        <label>9. عرّف قاعدة PG</label>
-        <textarea id="q9" rows="3" placeholder="اكتب تعريف قاعدة PG..." required></textarea>
-      </div>
-
-      <div class="form-group">
-        <label>10. عرّف قاعدة MG</label>
-        <textarea id="q10" rows="3" placeholder="اكتب تعريف قاعدة MG..." required></textarea>
-      </div>
-
-      <div class="form-group">
-        <label>11. عرّف قاعدة SL</label>
-        <textarea id="q11" rows="3" placeholder="اكتب تعريف قاعدة SL..." required></textarea>
-      </div>
-
-      <div class="form-group">
-        <label>12. عرّف قاعدة SP</label>
-        <textarea id="q12" rows="3" placeholder="اكتب تعريف قاعدة SP..." required></textarea>
-      </div>
-
-      <div class="form-group">
-        <label>13. عرّف قاعدة WS</label>
-        <textarea id="q13" rows="3" placeholder="اكتب تعريف قاعدة WS..." required></textarea>
-      </div>
-
-      <div class="form-group">
-        <label>14. عرّف قاعدة RK</label>
-        <textarea id="q14" rows="3" placeholder="اكتب تعريف قاعدة RK..." required></textarea>
-      </div>
-
-      <div class="form-group">
-        <label>15. عرّف قاعدة GR</label>
-        <textarea id="q15" rows="3" placeholder="اكتب تعريف قاعدة GR..." required></textarea>
-      </div>
-
-      <div class="section-divider">— أسئلة العيلة —</div>
-
-      <div class="form-group">
-        <label>16. ما هي مهمتك كفرد من أفراد العيلة؟</label>
-        <textarea id="q16" rows="4" placeholder="اكتب إجابتك..." required></textarea>
-      </div>
-
-      <div class="form-group">
-        <label>17. كيف تتصرف إذا طلب منك مواطن خدمة من العيلة؟</label>
-        <textarea id="q17" rows="4" placeholder="اكتب إجابتك..." required></textarea>
-      </div>
-
-      <div class="form-group">
-        <label>18. ما تصرفك إذا سألك شخص عن العيلة وطريقة التقديم؟</label>
-        <textarea id="q18" rows="4" placeholder="اكتب إجابتك..." required></textarea>
-      </div>
-
-      <button type="submit" class="submit-btn">⚜ إرسال التقديم ⚜</button>
-    </form>
   </div>
 
+  <div class="steps-nav" id="stepsNav"></div>
+
+  <div id="stepCard" class="step-card"></div>
+
+  <div class="nav-btns">
+    <button class="btn-prev" id="btnPrev" onclick="prevStep()" style="display:none">← السابق</button>
+    <button class="btn-next" id="btnNext" onclick="nextStep()">التالي →</button>
+    <button class="btn-submit" id="btnSubmit" onclick="submitForm()" style="display:none">⚜ إرسال التقديم</button>
+  </div>
 </div>
 
 <script>
-let FOUNDER_IDS = [];
-let currentUser = null;
-let isOpen = false;
+const steps = [
+  { q: 'مرحباً! قبل البدء، تأكد من استيفاء الشروط', hint: '', type: 'conditions' },
+  { q: 'ما هو اسمك في الخادم؟', hint: 'اكتب اسمك كما يظهر بالضبط', type: 'input', placeholder: 'مثال: Ahmed_Italiano' },
+  { q: 'ما هو الايدي الخاص بك في الخادم؟', hint: 'الرقم التعريفي الخاص بك', type: 'input', placeholder: 'مثال: 12345' },
+  { q: 'كم عدد ساعاتك؟', hint: 'اكتب العدد مع رابط صورة الساعات من Discord', type: 'input', placeholder: 'مثال: 200 ساعة — رابط الصورة' },
+  { q: 'كم عدد مخالفاتك الإدارية؟', hint: 'اكتب العدد مع رابط صورة السجل الإداري', type: 'input', placeholder: 'مثال: 0 مخالفات — رابط الصورة' },
+  { q: 'عرّف قاعدة TK', hint: 'Team Kill — قتل زميل في الفريق', type: 'textarea', placeholder: 'اكتب تعريفك...' },
+  { q: 'عرّف قاعدة DM', hint: 'Death Match — الاشتباك بدون مبرر', type: 'textarea', placeholder: 'اكتب تعريفك...' },
+  { q: 'عرّف قاعدة VDM', hint: 'Vehicle Death Match — الدهس بدون مبرر', type: 'textarea', placeholder: 'اكتب تعريفك...' },
+  { q: 'عرّف قاعدة SK', hint: 'Spawn Kill — القتل عند نقطة البداية', type: 'textarea', placeholder: 'اكتب تعريفك...' },
+  { q: 'عرّف قاعدة PG', hint: 'Power Gaming — استغلال قدرات غير واقعية', type: 'textarea', placeholder: 'اكتب تعريفك...' },
+  { q: 'عرّف قاعدة MG', hint: 'Meta Gaming — استخدام معلومات خارج اللعبة', type: 'textarea', placeholder: 'اكتب تعريفك...' },
+  { q: 'عرّف قاعدة SL', hint: 'Stream Snipe / قواعد البث', type: 'textarea', placeholder: 'اكتب تعريفك...' },
+  { q: 'عرّف قاعدة SP', hint: 'Safe Point — نقطة الأمان', type: 'textarea', placeholder: 'اكتب تعريفك...' },
+  { q: 'عرّف قاعدة WS', hint: 'قاعدة WS في السيرفر', type: 'textarea', placeholder: 'اكتب تعريفك...' },
+  { q: 'عرّف قاعدة RK', hint: 'Revenge Kill — القتل انتقاماً', type: 'textarea', placeholder: 'اكتب تعريفك...' },
+  { q: 'عرّف قاعدة GR', hint: 'قاعدة GR في السيرفر', type: 'textarea', placeholder: 'اكتب تعريفك...' },
+  { q: 'ما هي مهمتك كفرد من أفراد العيلة؟', hint: 'اشرح دورك ومسؤوليتك داخل العيلة', type: 'textarea', placeholder: 'اكتب إجابتك...' },
+  { q: 'كيف تتصرف إذا طلب منك مواطن خدمة من العيلة؟', hint: 'صف طريقة تعاملك مع المواطنين', type: 'textarea', placeholder: 'اكتب إجابتك...' },
+  { q: 'ما تصرفك إذا سألك شخص عن العيلة وطريقة التقديم؟', hint: 'كيف تمثل العيلة أمام الآخرين', type: 'textarea', placeholder: 'اكتب إجابتك...' },
+];
 
-async function init() {
-  const foundersRes = await fetch('/api/founders');
-  const foundersData = await foundersRes.json();
-  FOUNDER_IDS = foundersData.ids;
+let currentStep = 0;
+let answers = new Array(18).fill('');
 
-  try {
-    const [userRes, statusRes] = await Promise.all([
-      fetch('/auth/user'),
-      fetch('/api/status')
-    ]);
+function buildStepsNav() {
+  const nav = document.getElementById('stepsNav');
+  nav.innerHTML = steps.map((_, i) => `<div class="step-dot ${i === 0 ? 'active' : ''}" id="dot-${i}"></div>`).join('');
+}
 
-    currentUser = await userRes.json();
-    const status = await statusRes.json();
-    isOpen = status.open;
+function updateProgress() {
+  const pct = ((currentStep + 1) / steps.length) * 100;
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressCount').textContent = `${currentStep + 1} / ${steps.length}`;
 
-    if (currentUser) {
-      document.getElementById('userInfo').style.display = 'flex';
-      document.getElementById('userAvatar').src = currentUser.avatar;
-      document.getElementById('userName').textContent = currentUser.username;
+  steps.forEach((_, i) => {
+    const dot = document.getElementById(`dot-${i}`);
+    dot.className = 'step-dot ' + (i === currentStep ? 'active' : i < currentStep ? 'done' : '');
+  });
 
-      if (FOUNDER_IDS.includes(currentUser.id)) {
-        document.getElementById('adminPanel').style.display = 'block';
-        updateToggleBtn();
-      }
+  document.getElementById('btnPrev').style.display = currentStep > 0 ? 'block' : 'none';
+  document.getElementById('btnNext').style.display = currentStep < steps.length - 1 ? 'block' : 'none';
+  document.getElementById('btnSubmit').style.display = currentStep === steps.length - 1 ? 'block' : 'none';
+}
 
-      if (!isOpen) {
-        document.getElementById('closedBox').style.display = 'block';
-      } else {
-        document.getElementById('applyForm').style.display = 'block';
-      }
-    } else {
-      document.getElementById('loginBox').style.display = 'block';
+function renderStep() {
+  const step = steps[currentStep];
+  const card = document.getElementById('stepCard');
+
+  if (step.type === 'conditions') {
+    card.innerHTML = `
+      <div class="step-num">الخطوة ${currentStep + 1}</div>
+      <div class="step-question">${step.q}</div>
+      <div style="margin-top:1.5rem">
+        <div class="conditions-card">
+          <h3>⚜ شروط الانضمام</h3>
+          <div class="condition-item"><span class="condition-icon">⏰</span><span class="condition-text">ساعات تواجد لا تقل عن 150 ساعة</span></div>
+          <div class="condition-item"><span class="condition-icon">⭐</span><span class="condition-text">مستوى فوق 20</span></div>
+          <div class="condition-item"><span class="condition-icon">📋</span><span class="condition-text">سجل إداري لا يتعدى 3 مخالفات</span></div>
+        </div>
+        <p style="color:#555; font-size:0.85rem; text-align:center">بالضغط على التالي تؤكد استيفاءك للشروط</p>
+      </div>
+    `;
+  } else if (step.type === 'input') {
+    card.innerHTML = `
+      <div class="step-num">السؤال ${currentStep}</div>
+      <div class="step-question">${step.q}</div>
+      ${step.hint ? `<div class="step-hint">${step.hint}</div>` : ''}
+      <input class="step-input" type="text" id="currentInput" placeholder="${step.placeholder || ''}" value="${answers[currentStep - 1] || ''}">
+    `;
+    document.getElementById('currentInput').focus();
+  } else {
+    card.innerHTML = `
+      <div class="step-num">السؤال ${currentStep}</div>
+      <div class="step-question">${step.q}</div>
+      ${step.hint ? `<div class="step-hint">${step.hint}</div>` : ''}
+      <textarea class="step-textarea" id="currentInput" rows="5" placeholder="${step.placeholder || ''}">${answers[currentStep - 1] || ''}</textarea>
+    `;
+    document.getElementById('currentInput').focus();
+  }
+
+  updateProgress();
+}
+
+function saveCurrentAnswer() {
+  if (currentStep > 0) {
+    const input = document.getElementById('currentInput');
+    if (input) answers[currentStep - 1] = input.value.trim();
+  }
+}
+
+function nextStep() {
+  if (currentStep > 0) {
+    const input = document.getElementById('currentInput');
+    if (!input?.value.trim()) {
+      input.style.borderColor = '#CC0000';
+      setTimeout(() => input.style.borderColor = '', 1000);
+      return;
     }
-  } catch(e) {
-    document.getElementById('loginBox').style.display = 'block';
+  }
+  saveCurrentAnswer();
+  if (currentStep < steps.length - 1) {
+    currentStep++;
+    renderStep();
   }
 }
 
-function updateToggleBtn() {
-  const btn = document.getElementById('toggleBtn');
-  if (isOpen) {
-    btn.textContent = '🔒 إغلاق التقديم';
-    btn.className = 'toggle-btn toggle-close';
-  } else {
-    btn.textContent = '✅ فتح التقديم';
-    btn.className = 'toggle-btn toggle-open';
+function prevStep() {
+  saveCurrentAnswer();
+  if (currentStep > 0) {
+    currentStep--;
+    renderStep();
   }
 }
 
-async function toggleStatus() {
-  const res = await fetch('/api/toggle', { method: 'POST' });
-  const data = await res.json();
-  if (data.error) return alert(data.error);
-  isOpen = data.open;
-  updateToggleBtn();
-
-  if (isOpen) {
-    document.getElementById('closedBox').style.display = 'none';
-    document.getElementById('applyForm').style.display = 'block';
-  } else {
-    document.getElementById('applyForm').style.display = 'none';
-    document.getElementById('closedBox').style.display = 'block';
-  }
-}
-
-document.getElementById('theForm')?.addEventListener('submit', async (e) => {
-  e.preventDefault();
-  const btn = document.querySelector('.submit-btn');
+async function submitForm() {
+  saveCurrentAnswer();
+  const btn = document.getElementById('btnSubmit');
   btn.disabled = true;
   btn.textContent = 'جاري الإرسال...';
-
-  const answers = [];
-  for (let i = 1; i <= 18; i++) {
-    answers.push(document.getElementById(`q${i}`)?.value || '');
-  }
 
   const res = await fetch('/api/apply', {
     method: 'POST',
@@ -399,15 +292,44 @@ document.getElementById('theForm')?.addEventListener('submit', async (e) => {
   });
 
   if (res.ok) {
-    document.getElementById('applyForm').style.display = 'none';
+    document.getElementById('applyBox').style.display = 'none';
     document.getElementById('successBox').style.display = 'block';
   } else {
     const err = await res.json();
     alert(err.error || 'حصل خطأ!');
     btn.disabled = false;
-    btn.textContent = '⚜ إرسال التقديم ⚜';
+    btn.textContent = '⚜ إرسال التقديم';
   }
-});
+}
+
+async function init() {
+  const [userRes, statusRes, foundersRes] = await Promise.all([
+    fetch('/auth/user'),
+    fetch('/api/status'),
+    fetch('/api/founders')
+  ]);
+
+  const user = await userRes.json();
+  const { open } = await statusRes.json();
+
+  if (!user) {
+    document.getElementById('loginBox').style.display = 'flex';
+    return;
+  }
+
+  document.getElementById('userChip').style.display = 'flex';
+  document.getElementById('userAvatar').src = user.avatar;
+  document.getElementById('userName').textContent = user.username;
+
+  if (!open) {
+    document.getElementById('closedBox').style.display = 'flex';
+    return;
+  }
+
+  document.getElementById('applyBox').style.display = 'block';
+  buildStepsNav();
+  renderStep();
+}
 
 init();
 </script>
