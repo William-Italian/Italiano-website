@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أعضاء العيلة - ITALIANO Family</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Cinzel:wght@400;700;900&family=Tajawal:wght@300;400;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --red: #8B0000;
+            --red-light: #CC0000;
+            --gold: #C9A84C;
+            --gold-light: #F0C060;
+            --black: #0A0A0A;
+            --dark: #111111;
+            --dark2: #1A1A1A;
+            --gray: #888;
+            --white: #F5F0E8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--black);
+            color: var(--white);
+            font-family: 'Tajawal', sans-serif;
+            overflow-x: hidden;
+            cursor: default;
+        }
+
+        /* ─── SCROLLBAR ─── */
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--black);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--gold);
+            border-radius: 2px;
+        }
+
+        /* ─── NOISE TEXTURE ─── */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.4;
+        }
+
+        /* ─── NAV ─── */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.2rem 4rem;
+            background: rgba(10, 10, 10, 0.92);
+            border-bottom: 1px solid rgba(201, 168, 76, 0.2);
+            backdrop-filter: blur(12px);
+        }
+
+        .nav-logo {
+            font-family: 'Cinzel', serif;
+            font-size: 1.4rem;
+            color: var(--gold);
+            letter-spacing: 4px;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-family: 'Tajawal', sans-serif;
+            font-size: 0.9rem;
+            color: var(--gray);
+            text-decoration: none;
+            letter-spacing: 2px;
+            transition: color 0.3s;
+            text-transform: uppercase;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        /* ─── SECTION BASE ─── */
+        section {
+            padding: 8rem 4rem 6rem;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-tag {
+            font-family: 'Cinzel', serif;
+            font-size: 0.7rem;
+            letter-spacing: 5px;
+            color: var(--red-light);
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+
+        .section-title span {
+            color: var(--gold);
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            width: 60px;
+            height: 1px;
+            background: var(--gold);
+            opacity: 0.4;
+        }
+
+        .divider span {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 1rem;
+        }
+
+        /* ─── MEMBERS ─── */
+        #members {
+            background: var(--black);
+        }
+
+        .members-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .member-card {
+            border: 1px solid rgba(201, 168, 76, 0.2);
+            background: var(--dark2);
+            overflow: hidden;
+            transition: all 0.3s;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .member-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(to right, transparent, var(--red), transparent);
+            transform: scaleX(0);
+            transition: transform 0.3s;
+            z-index: 10;
+        }
+
+        .member-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .member-card:hover {
+            border-color: rgba(201, 168, 76, 0.4);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(139, 0, 0, 0.2);
+        }
+
+        .member-image-box {
+            width: 100%;
+            height: 280px;
+            background: linear-gradient(135deg, rgba(139, 0, 0, 0.3), rgba(201, 168, 76, 0.1));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .member-image-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .member-card:hover .member-image-box img {
+            transform: scale(1.05);
+        }
+
+        .member-avatar {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--red), var(--dark2));
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cinzel', serif;
+            font-size: 3rem;
+            color: var(--gold);
+        }
+
+        .member-content {
+            padding: 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .member-header {
+            text-align: center;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+            padding-bottom: 1rem;
+        }
+
+        .member-name {
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            color: var(--white);
+            margin-bottom: 0.3rem;
+            font-weight: 700;
+        }
+
+        .member-role {
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 0.8rem;
+        }
+
+        .role-founder {
+            color: var(--gold);
+        }
+
+        .role-admin {
+            color: var(--red-light);
+        }
+
+        .role-member {
+            color: var(--gray);
+        }
+
+        .member-rating {
+            display: flex;
+            gap: 0.3rem;
+            justify-content: center;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .member-rating .star {
+            color: var(--gold);
+        }
+
+        .member-rating .star.empty {
+            color: rgba(201, 168, 76, 0.3);
+        }
+
+        .member-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            font-size: 0.8rem;
+            color: var(--gray);
+            flex: 1;
+        }
+
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.4rem 0;
+            border-bottom: 1px solid rgba(201, 168, 76, 0.1);
+        }
+
+        .info-label {
+            color: var(--gray);
+            font-size: 0.75rem;
+        }
+
+        .info-value {
+            color: var(--white);
+            font-weight: 500;
+        }
+
+        /* ─── FOOTER ─── */
+        footer {
+            border-top: 1px solid rgba(201, 168, 76, 0.15);
+            padding: 2rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--dark);
+            margin-top: auto;
+        }
+
+        .footer-logo {
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
+            color: var(--gold);
+            letter-spacing: 4px;
+        }
+
+        .footer-text {
+            font-size: 0.8rem;
+            color: var(--gray);
+            letter-spacing: 1px;
+        }
+
+        .footer-motto {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 0.85rem;
+            color: rgba(201, 168, 76, 0.6);
+        }
+
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 1.5rem;
+            }
+
+            .nav-links {
+                gap: 1.2rem;
+            }
+
+            .nav-links a {
+                font-size: 0.75rem;
+            }
+
+            section {
+                padding: 6rem 1.5rem 4rem;
+            }
+
+            footer {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAV -->
+    <nav>
+        <a href="/" class="nav-logo">ITALIANO</a>
+        <ul class="nav-links">
+            <li><a href="/#about">العيلة</a></li>
+            <li><a href="/members.html">الأعضاء</a></li>
+            <li><a href="/rules.html">القوانين</a></li>
+            <li><a href="/#contact">تواصل</a></li>
+            <li><a href="/apply">📋 التقديم</a></li>
+        </ul>
+    </nav>
+
+    <!-- MEMBERS -->
+    <section id="members">
+        <div class="section-header">
+            <span class="section-tag">La Famiglia</span>
+            <h2 class="section-title">أعضاء <span>العيلة</span></h2>
+            <div class="divider"><span>⚜</span></div>
+        </div>
+        <div class="members-grid">
+            <div class="member-card">
+                <div class="member-image-box">
+                    <div class="member-avatar">T</div>
+                </div>
+                <div class="member-content">
+                    <div class="member-header">
+                        <div class="member-name">Taha Italiano</div>
+                        <div class="member-role role-founder">⚜ Founder</div>
+                        <div class="member-rating">
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                        </div>
+                    </div>
+                    <div class="member-info">
+                        <div class="info-item">
+                            <span class="info-label">Money:</span>
+                            <span class="info-value">$10,000,000</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Wظيفة:</span>
+                            <span class="info-value">OWNER</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Joined:</span>
+                            <span class="info-value">29/4/2026</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="member-card">
+                <div class="member-image-box">
+                    <div class="member-avatar">F</div>
+                </div>
+                <div class="member-content">
+                    <div class="member-header">
+                        <div class="member-name">Franklin Italiano</div>
+                        <div class="member-role role-founder">⚜ Founder</div>
+                        <div class="member-rating">
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                        </div>
+                    </div>
+                    <div class="member-info">
+                        <div class="info-item">
+                            <span class="info-label">Money:</span>
+                            <span class="info-value">$5,000,000</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Wظيفة:</span>
+                            <span class="info-value">FOUNDER</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Joined:</span>
+                            <span class="info-value">8/5/2026</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="member-card">
+                <div class="member-image-box">
+                    <div class="member-avatar">W</div>
+                </div>
+                <div class="member-content">
+                    <div class="member-header">
+                        <div class="member-name">OMAR ITALIANO</div>
+                        <div class="member-role role-admin">💻 Developer</div>
+                        <div class="member-rating">
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star empty">☆</span>
+                        </div>
+                    </div>
+                    <div class="member-info">
+                        <div class="info-item">
+                            <span class="info-label">Money:</span>
+                            <span class="info-value">$4,000,000+</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Wظيفة:</span>
+                            <span class="info-value">Clothes Designer</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Joined:</span>
+                            <span class="info-value">8/5/2026</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="member-card">
+                <div class="member-image-box">
+                    <div class="member-avatar">E</div>
+                </div>
+                <div class="member-content">
+                    <div class="member-header">
+                        <div class="member-name">Eryx_L.Ravenhall</div>
+                        <div class="member-role role-admin">FOUNDER</div>
+                        <div class="member-rating">
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star empty">☆</span>
+                        </div>
+                    </div>
+                    <div class="member-info">
+                        <div class="info-item">
+                            <span class="info-label">Money:</span>
+                            <span class="info-value">$2,000,000+</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Wظيفة:</span>
+                            <span class="info-value">FOUNDER</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Joined:</span>
+                            <span class="info-value">1/6/2026</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-logo">ITALIANO</div>
+        <div class="footer-text">© 2026 ITALIANO Family. All rights reserved.</div>
+        <div class="footer-motto">La famiglia prima di tutto</div>
+    </footer>
+
+</body>
+
+</html>
