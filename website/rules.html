@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>قوانين العيلة - ITALIANO Family</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Cinzel:wght@400;700;900&family=Tajawal:wght@300;400;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --red: #8B0000;
+            --red-light: #CC0000;
+            --gold: #C9A84C;
+            --gold-light: #F0C060;
+            --black: #0A0A0A;
+            --dark: #111111;
+            --dark2: #1A1A1A;
+            --gray: #888;
+            --white: #F5F0E8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--black);
+            color: var(--white);
+            font-family: 'Tajawal', sans-serif;
+            overflow-x: hidden;
+            cursor: default;
+        }
+
+        /* ─── SCROLLBAR ─── */
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--black);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--gold);
+            border-radius: 2px;
+        }
+
+        /* ─── NOISE TEXTURE ─── */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.4;
+        }
+
+        /* ─── NAV ─── */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.2rem 4rem;
+            background: rgba(10, 10, 10, 0.92);
+            border-bottom: 1px solid rgba(201, 168, 76, 0.2);
+            backdrop-filter: blur(12px);
+        }
+
+        .nav-logo {
+            font-family: 'Cinzel', serif;
+            font-size: 1.4rem;
+            color: var(--gold);
+            letter-spacing: 4px;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-family: 'Tajawal', sans-serif;
+            font-size: 0.9rem;
+            color: var(--gray);
+            text-decoration: none;
+            letter-spacing: 2px;
+            transition: color 0.3s;
+            text-transform: uppercase;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        /* ─── SECTION BASE ─── */
+        section {
+            padding: 8rem 4rem 6rem;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-tag {
+            font-family: 'Cinzel', serif;
+            font-size: 0.7rem;
+            letter-spacing: 5px;
+            color: var(--red-light);
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+
+        .section-title span {
+            color: var(--gold);
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            width: 60px;
+            height: 1px;
+            background: var(--gold);
+            opacity: 0.4;
+        }
+
+        .divider span {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 1rem;
+        }
+
+        /* ─── RULES ─── */
+        #rules {
+            background: var(--dark);
+        }
+
+        .rules-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .rule-item {
+            display: flex;
+            gap: 1.5rem;
+            padding: 1.5rem;
+            border: 1px solid rgba(201, 168, 76, 0.1);
+            margin-bottom: 1rem;
+            background: var(--dark2);
+            transition: all 0.3s;
+        }
+
+        .rule-item:hover {
+            border-color: rgba(201, 168, 76, 0.3);
+            box-shadow: 0 10px 30px rgba(139, 0, 0, 0.1);
+            transform: translateX(-4px);
+        }
+
+        .rule-num {
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            font-weight: 900;
+            color: rgba(139, 0, 0, 0.4);
+            min-width: 50px;
+            line-height: 1;
+        }
+
+        .rule-content h4 {
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .rule-content p {
+            color: var(--gray);
+            font-size: 0.9rem;
+            line-height: 1.8;
+        }
+
+        /* ─── FOOTER ─── */
+        footer {
+            border-top: 1px solid rgba(201, 168, 76, 0.15);
+            padding: 2rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--dark);
+            margin-top: auto;
+        }
+
+        .footer-logo {
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
+            color: var(--gold);
+            letter-spacing: 4px;
+        }
+
+        .footer-text {
+            font-size: 0.8rem;
+            color: var(--gray);
+            letter-spacing: 1px;
+        }
+
+        .footer-motto {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 0.85rem;
+            color: rgba(201, 168, 76, 0.6);
+        }
+
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 1.5rem;
+            }
+
+            .nav-links {
+                gap: 1.2rem;
+            }
+
+            .nav-links a {
+                font-size: 0.75rem;
+            }
+
+            section {
+                padding: 6rem 1.5rem 4rem;
+            }
+
+            footer {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAV -->
+    <nav>
+        <a href="/" class="nav-logo">ITALIANO</a>
+        <ul class="nav-links">
+            <li><a href="/#about">العيلة</a></li>
+            <li><a href="/members.html">الأعضاء</a></li>
+            <li><a href="/rules.html">القوانين</a></li>
+            <li><a href="/#contact">تواصل</a></li>
+            <li><a href="/apply">📋 التقديم</a></li>
+        </ul>
+    </nav>
+
+    <!-- RULES -->
+    <section id="rules">
+        <div class="section-header">
+            <span class="section-tag">Le Regole</span>
+            <h2 class="section-title">قوانين <span>العيلة</span></h2>
+            <div class="divider"><span>⚜</span></div>
+        </div>
+        <div class="rules-container">
+            <div class="rule-item">
+                <div class="rule-num">01</div>
+                <div class="rule-content">
+                    <h4>الاحترام المتبادل • Mutual Respect</h4>
+                    <p>الاحترام أساس العيلة. يجب احترام جميع الأعضاء بغض النظر عن رتبهم. Respect is the foundation of La
+                        Famiglia.
+                    </p>
+                </div>
+            </div>
+            <div class="rule-item">
+                <div class="rule-num">02</div>
+                <div class="rule-content">
+                    <h4>الولاء للعيلة • Family Loyalty</h4>
+                    <p>العيلة فوق كل شيء. الولاء ليس خياراً، بل واجب. La famiglia prima di tutto.</p>
+                </div>
+            </div>
+            <div class="rule-item">
+                <div class="rule-num">03</div>
+                <div class="rule-content">
+                    <h4>شروط الانضمام • Joining Requirements</h4>
+                    <p>ساعات تواجد 150+ • مستوى 20+ • مخالفات إدارية أقل من 3 • Hours: 150+ • Level: 20+ • Violations:
+                        less than 3
+                    </p>
+                </div>
+            </div>
+            <div class="rule-item">
+                <div class="rule-num">04</div>
+                <div class="rule-content">
+                    <h4>السلوك اللائق • Proper Conduct</h4>
+                    <p>ممنوع الإساءة أو التنمر أو الكلام الخارج عن الأدب داخل العيلة. No harassment, bullying, or
+                        disrespectful
+                        behavior.</p>
+                </div>
+            </div>
+            <div class="rule-item">
+                <div class="rule-num">05</div>
+                <div class="rule-content">
+                    <h4>الخيانة • Betrayal</h4>
+                    <p>الخيانة لا تُغتفر. من خان العيلة خرج منها للأبد. Betrayal is unforgivable — once a traitor,
+                        always an
+                        outsider.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-logo">ITALIANO</div>
+        <div class="footer-text">© 2026 ITALIANO Family. All rights reserved.</div>
+        <div class="footer-motto">La famiglia prima di tutto</div>
+    </footer>
+
+</body>
+
+</html>
